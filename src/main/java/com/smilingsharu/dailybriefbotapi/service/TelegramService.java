@@ -3,11 +3,13 @@ package com.smilingsharu.dailybriefbotapi.service;
 import com.smilingsharu.dailybriefbotapi.config.AppConfig;
 import com.smilingsharu.dailybriefbotapi.dto.SendMessageRequest;
 import jakarta.annotation.PostConstruct;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
+@Slf4j
 @Service
 public class TelegramService {
     @Value("${telegram.bot.token}")
@@ -31,8 +33,12 @@ public void sendMessage(){
     SendMessageRequest sendMsg = new SendMessageRequest();
     sendMsg.setChatId(botID);
     sendMsg.setText("My first message sharu");
-    String response = restClient.post().uri(url).body(sendMsg).retrieve().body(String.class);
-    System.out.println(response);
+    try {
+        String response = restClient.post().uri(url).body(sendMsg).retrieve().body(String.class);
+        System.out.println(response);
+    } catch (Exception e) {
+        log.error("send message exception in telegram"+e);
+    }
 }
 }
 
