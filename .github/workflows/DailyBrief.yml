@@ -9,4 +9,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Call Daily Brief API
-      run: curl -X GET "https://dailybriefbotapi.onrender.com/api/dailyBrief/today"
+      run: curl "https://dailybriefbotapi.onrender.com/api/dailyBrief/today"
