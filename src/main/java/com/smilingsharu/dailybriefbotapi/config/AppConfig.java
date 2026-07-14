@@ -9,7 +9,7 @@ import org.springframework.web.client.RestClient;
 public class AppConfig {
 
     @Bean
-  public RestClient restClinet(){
+  public RestClient restClient(){
         return RestClient.create();
     }
 

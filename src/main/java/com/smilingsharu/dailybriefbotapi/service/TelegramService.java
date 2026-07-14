@@ -16,6 +16,8 @@ public class TelegramService {
     private String botToken;
     @Value("${telegram.chat.id}")
     private String botID;
+    @Value("${telegram.url}")
+    private String telegramUrl;
 
 private final RestClient restClient;
 
@@ -28,11 +30,14 @@ private final RestClient restClient;
         System.out.println("id -->"+ botID);
         //System.out.println("token -->"+ botToken);
     }
-public void sendDailyBrief(){
-        String url = "https://api.telegram.org/bot" + botToken +"/sendMessage";
+
+
+public void sendDailyBrief(String msg){
+        String url = telegramUrl + botToken +"/sendMessage";
     SendMessageRequest sendMsg = new SendMessageRequest();
     sendMsg.setChatId(botID);
-    sendMsg.setText("today's brief");
+    sendMsg.setText(msg);
+    sendMsg.setParseMode("HTML");
     try {
         String response = restClient.post().uri(url).body(sendMsg).retrieve().body(String.class);
         System.out.println(response);
