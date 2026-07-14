@@ -9,5 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Call Daily Brief API
-      run: curl "https://dailybriefbotapi.onrender.com/api/dailyBrief/today"
+    - name: Call Daily Brief API
+      run: |
+        curl --fail --silent --show-error \
+          "https://dailybriefbotapi.onrender.com/api/dailyBrief/today"
