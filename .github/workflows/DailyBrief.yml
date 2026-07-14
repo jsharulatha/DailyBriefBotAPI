@@ -11,4 +11,4 @@ jobs:
     steps:
     - name: Call Daily Brief API
       run: |
-        curl --fail --silent --show-error "${{ secrets.DAILY_BRIEF_API_URL }}"
+        curl --fail --silent --show-error "${{ secrets.RENDER_DAILY_BRIEF_API_URL }}"
