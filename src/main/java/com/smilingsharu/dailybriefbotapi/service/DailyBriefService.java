@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
@@ -47,11 +49,12 @@ public class DailyBriefService {
                 rssNewsService.getTopHeadlines(
                         worldRss,
                         DailyBriefConfig.WORLD_LIMIT);
-
+        String date = LocalDate.now()
+                .format(DateTimeFormatter.ofPattern("dd-MMM-yyyy"));
         StringBuilder message = new StringBuilder();
 
-        message.append("☀️ Daily Brief\n\n");
-
+        message.append("☀️ Good Morning! Here is the daily news \n");
+        message.append("📅 ").append(date).append("\n\n");
         appendSection(message, "🏙 Chennai", chennaiNews);
         appendSection(message, "🏛 Tamil Nadu", tamilNaduNews);
         appendSection(message, "🇮🇳 India", indiaNews);
