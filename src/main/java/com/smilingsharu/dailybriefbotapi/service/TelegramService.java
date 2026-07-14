@@ -28,11 +28,11 @@ private final RestClient restClient;
         System.out.println("id -->"+ botID);
         //System.out.println("token -->"+ botToken);
     }
-public void sendMessage(){
+public void sendMessage(String msg){
         String url = "https://api.telegram.org/bot" + botToken +"/sendMessage";
     SendMessageRequest sendMsg = new SendMessageRequest();
     sendMsg.setChatId(botID);
-    sendMsg.setText("My first message sharu");
+    sendMsg.setText(msg);
     try {
         String response = restClient.post().uri(url).body(sendMsg).retrieve().body(String.class);
         System.out.println(response);
