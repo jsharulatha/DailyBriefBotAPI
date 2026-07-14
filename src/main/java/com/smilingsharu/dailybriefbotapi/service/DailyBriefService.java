@@ -59,7 +59,7 @@ public class DailyBriefService {
         appendSection(message, "🏛 Tamil Nadu", tamilNaduNews);
         appendSection(message, "🇮🇳 India", indiaNews);
         appendSection(message, "🌍 International", worldNews);
-
+        System.out.println("message to telegram"+ message.toString());
         return message.toString();
     }
 
@@ -74,19 +74,27 @@ public class DailyBriefService {
             message.append("No news available.\n\n");
             return;
         }
-
+int count=1;
         for (int i = 0; i < newsItems.size(); i++) {
 
             NewsItemResponse item = newsItems.get(i);
-            message.append(i + 1)
+            message.append(count++)
                     .append(". <b>")
-                    .append(item.getTitle())
-                    .append("</b>\n");
-
-            message.append("\"") .append(item.getUrl())
+                    .append(escapeHtml(item.getTitle()))
+                    .append("</b>\n")
+                    .append("<a href=\"")  .append(item.getUrl())
                     .append("\">Read More</a>\n\n");
 
 
         }
+    }
+    private String escapeHtml(String text) {
+        if (text == null) {
+            return "";
+        }
+
+        return text.replace("&", "&amp;")
+                .replace("<", "&lt;")
+                .replace(">", "&gt;");
     }
 }

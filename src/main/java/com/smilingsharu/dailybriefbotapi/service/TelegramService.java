@@ -12,7 +12,7 @@ import org.springframework.web.client.RestClient;
 @Slf4j
 @Service
 public class TelegramService {
-    @Value("${telegram.bot.token}")
+  @Value("${telegram.bot.token}")
     private String botToken;
     @Value("${telegram.chat.id}")
     private String botID;
@@ -36,12 +36,14 @@ public void sendDailyBrief(String msg){
     System.out.println("testing");
         String url = telegramUrl + botToken +"/sendMessage";
     SendMessageRequest sendMsg = new SendMessageRequest();
+
     sendMsg.setChatId(botID);
     sendMsg.setText(msg);
     sendMsg.setParseMode("HTML");
+
     try {
         String response = restClient.post().uri(url).body(sendMsg).retrieve().body(String.class);
-        System.out.println(response);
+        System.out.println(sendMsg);
     } catch (Exception e) {
         log.error("send message exception in telegram"+e);
     }
