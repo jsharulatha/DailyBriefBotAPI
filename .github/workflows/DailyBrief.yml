@@ -1,15 +1,14 @@
-name: Daily Brief
+name: Daily_Brief
 
 on:
-schedule:
-- cron: '30 0 * * *'   #6.00 AM IST every day, every month
-
-workflow_dispatch:
-
+  schedule:
+  - cron: '30 0 * * *'   #6.00 AM IST every day, every month
+  workflow_dispatch:
 jobs:
-send-brief:
-runs-on: ubuntu-latest
-
-steps:
-- name: Call Daily Brief API
-run: | curl https://dailybriefbotapi.onrender.com/api/dailyBrief/today
+  send-brief:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Call Daily Brief API
+      run: |
+        curl --fail --silent --show-error "${{ secrets.RENDER_DAILY_BRIEF_API_URL }}"
