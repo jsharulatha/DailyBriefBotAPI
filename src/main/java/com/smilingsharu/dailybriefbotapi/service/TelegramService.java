@@ -33,6 +33,7 @@ private final RestClient restClient;
 
 
 public void sendDailyBrief(String msg){
+    System.out.println("testing");
         String url = telegramUrl + botToken +"/sendMessage";
     SendMessageRequest sendMsg = new SendMessageRequest();
     sendMsg.setChatId(botID);
