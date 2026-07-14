@@ -72,18 +72,18 @@ public class DailyBriefService {
             return;
         }
 
-        for (NewsItemResponse item : newsItems) {
-            message.append("📰 <b>")
+        for (int i = 0; i < newsItems.size(); i++) {
+
+            NewsItemResponse item = newsItems.get(i);
+            message.append(i + 1)
+                    .append(". <b>")
                     .append(item.getTitle())
                     .append("</b>\n");
 
-            if (item.getUrl() != null && !item.getUrl().isBlank()) {
-                message.append(item.getUrl())
-                        .append("\">Read More</a>\n\n");
+            message.append("\"") .append(item.getUrl())
+                    .append("\">Read More</a>\n\n");
 
-            }
 
-            message.append("\n");
         }
     }
 }

@@ -8,5 +8,6 @@ public class SendMessageRequest {
     @JsonProperty("chat_id")
     private String chatId;
     private String text;
+    @JsonProperty("parse_mode")
     private String parseMode;
 }
