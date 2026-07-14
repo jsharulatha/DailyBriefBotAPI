@@ -11,5 +11,4 @@ jobs:
     steps:
     - name: Call Daily Brief API
       run: |
-        curl --fail --silent --show-error \
-          "https://dailybriefbotapi.onrender.com/api/dailyBrief/today"
+        curl --fail --silent --show-error "${{ secrets.DAILY_BRIEF_API_URL }}"
