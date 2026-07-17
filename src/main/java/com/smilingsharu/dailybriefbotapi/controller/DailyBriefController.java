@@ -14,17 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class DailyBriefController {
 
 private DailyBriefService dailyBriefService;
-private TelegramService telegramService;
-
-    public DailyBriefController(DailyBriefService dailyBriefService, TelegramService telegramService) {
-        this.dailyBriefService = dailyBriefService;
-        this.telegramService = telegramService;
-    }
 
     @GetMapping(value = "/today",produces = MediaType.TEXT_HTML_VALUE)
-    public String sendTodayBrief(){
-String message = dailyBriefService.buildNews();
-        telegramService.sendDailyBrief(message);
-       return "Sent the message successfully";
+    public ResponseEntity<String> sendTodayBrief(){
+        dailyBriefService.sendDailyBriefAsync();
+       return ResponseEntity.accepted().body("Sent the message successfully");
     }
 }

@@ -4,6 +4,7 @@ import com.smilingsharu.dailybriefbotapi.config.DailyBriefConfig;
 import com.smilingsharu.dailybriefbotapi.dto.NewsItemResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -27,6 +28,15 @@ public class DailyBriefService {
 
     @Value("${news.rss.world}")
     private String worldRss;
+    private TelegramService telegramService;
+
+    @Async
+    public void sendDailyBriefAsync() {
+
+        String message = buildNews();
+        telegramService.sendDailyBrief(message);
+
+    }
 
     public String buildNews() {
 

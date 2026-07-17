@@ -9,6 +9,7 @@ import com.rometools.rome.io.XmlReader;
 
 
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +26,14 @@ public class RssNewsServiceImpl implements RssNewsService {
         try {
 
             URL url = new URL(rssUrl);
+
+            URLConnection connection = url.openConnection();
+
+            connection.setConnectTimeout(5000); // 5 seconds to connect
+
+            connection.setReadTimeout(8000); // 8 seconds to read
+
+            connection.setRequestProperty("User-Agent", "DailyBriefBot/1.0");
 
             SyndFeed feed = new SyndFeedInput()
                     .build(new XmlReader(url));
