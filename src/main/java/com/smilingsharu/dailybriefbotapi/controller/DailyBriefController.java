@@ -15,9 +15,9 @@ public class DailyBriefController {
 
 private DailyBriefService dailyBriefService;
 
-    @GetMapping(value = "/today",produces = MediaType.TEXT_HTML_VALUE)
+    @GetMapping(value = "/todayTrigger",produces = MediaType.TEXT_HTML_VALUE)
     public ResponseEntity<String> sendTodayBrief(){
         dailyBriefService.sendDailyBriefAsync();
-       return ResponseEntity.accepted().body("Sent the message successfully");
+       return ResponseEntity.accepted().body("Daily brief triggered successfully");
     }
 }
