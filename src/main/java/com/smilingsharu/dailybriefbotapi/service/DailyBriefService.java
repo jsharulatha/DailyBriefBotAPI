@@ -3,6 +3,7 @@ package com.smilingsharu.dailybriefbotapi.service;
 import com.smilingsharu.dailybriefbotapi.config.DailyBriefConfig;
 import com.smilingsharu.dailybriefbotapi.dto.NewsItemResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
@@ -12,8 +13,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
-public class DailyBriefService {
+
+public class DailyBriefService{
 
     private final RssNewsService rssNewsService;
 
@@ -28,7 +29,13 @@ public class DailyBriefService {
 
     @Value("${news.rss.world}")
     private String worldRss;
-    private TelegramService telegramService;
+    @Autowired
+    private final TelegramService telegramService;
+
+    public DailyBriefService(RssNewsService rssNewsService, TelegramService telegramService) {
+        this.rssNewsService = rssNewsService;
+        this.telegramService = telegramService;
+    }
 
     @Async
     public void sendDailyBriefAsync() {

@@ -13,7 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/dailyBrief")
 public class DailyBriefController {
 
-private DailyBriefService dailyBriefService;
+private final DailyBriefService dailyBriefService;
+
+    public DailyBriefController(DailyBriefService dailyBriefService) {
+        this.dailyBriefService = dailyBriefService;
+    }
 
     @GetMapping(value = "/todayTrigger",produces = MediaType.TEXT_HTML_VALUE)
     public ResponseEntity<String> sendTodayBrief(){
